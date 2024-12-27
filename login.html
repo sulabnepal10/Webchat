@@ -1,29 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>login</title>
-	<link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="style1.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="style1.css">
 </head>
 <body>
- <div class="container">
- 	<div class="header">
- 		<h1>Wicked Chat</h1>
- 	</div>
-	 
- 	<div class="main">
- 		<form>
- 			<span>
- 				<i class="fa fa-user"></i>
- 				<input type="text" placeholder="Username" name="">
- 			</span><br>
- 			<span>
-				
- 				<button><a href="index.html" style="text-decoration: none; color: black; font-family: sans-serif;">login</a></button>
-			
-			</span>			
- 		</form>
- 	</div>
- </div>
+    <div class="container">
+        <div class="header">
+            <h1>Sacred Room</h1>
+        </div>
+        <div class="main">
+            <form onsubmit="saveName(event)">
+                <span>
+                    <i class="fa fa-user"></i>
+                    <input type="text" id="username" placeholder="Username" required>
+                </span><br>
+                <span>
+                    <button type="submit">Login</button>
+                </span>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function saveName(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            localStorage.setItem('username', username); // Store the username in localStorage
+            window.location.href = "index.html"; // Redirect to index.html
+        }
+    </script>
 </body>
 </html>

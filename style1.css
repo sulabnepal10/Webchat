@@ -1,97 +1,136 @@
 body {
-	font-family: sans-serif;	
-	background-image: url(bg.jpg);
-	background-repeat: no-repeat;
-	overflow: hidden;
-	background-size: cover;
+    font-family: sans-serif;
+    background-image: url(bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
-	width: 380px;
-	margin:7% auto;
-	border-radius: 25px;
-	background-color: rgba(0,0,0,0.1);
-	box-shadow: 0 0 17px #333;
-}
-
-.header {
-	text-align: center;
-	padding-top: 75px;
+    width: 380px;
+    padding: 20px;
+    border-radius: 25px;
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 17px #333;
+    color: white;
+    text-align: center;
 }
 
 .header h1 {
-	color: #333;
-	font-size: 45px;
-	margin-bottom: 80px;
-}
-
-.main {
-	text-align: center;
+    font-size: 30px;
+    margin-bottom: 40px;
 }
 
 .main input, button {
-	width: 300px;
-	height: 40px;
-	border-radius: 14px;
-	border:none;
-	outline: none;
-	padding-left: 40px;
-	box-sizing: border-box;
-	font-size: 15px;
-	color: #333;
-	margin-bottom: 40px;
+    width: 100%;
+    height: 40px;
+    border-radius: 14px;
+    border: none;
+    outline: none;
+    padding-left: 40px;
+    box-sizing: border-box;
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 20px;
+    background-color: #fff;
 }
 
 .main button {
-	padding-left: 0;
-	background-color: #83acf1;
-	letter-spacing: 1px;
-	font-weight: bold;
-	margin-bottom: 70px;
+    background-color: #83acf1;
+    letter-spacing: 1px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .main button:hover {
-	box-shadow: 2px 2px 5px #555;
-	background-color: #7799d4;
+    box-shadow: 2px 2px 5px #555;
+    background-color: #7799d4;
 }
+
 .main input:hover {
-	box-shadow: 2px 2px 5px #555;
-	background-color: #ddd;
+    box-shadow: 2px 2px 5px #555;
+    background-color: #ddd;
 }
 
 .main span {
-	position: relative;
+    position: relative;
 }
 
 .main i {
-	position: absolute;
-	left: 15px;
-	color: #333;
-	font-size: 16px;
-	top: 2px;
+    position: absolute;
+    left: 15px;
+    color: #333;
+    font-size: 16px;
+    top: 2px;
 }
 
+/* Media Query for Devices Larger than 480px */
+@media (min-width: 480px) {
+    .container {
+        width: 400px;
+    }
 
+    .header h1 {
+        font-size: 50px;
+    }
 
+    .main input, button {
+        height: 45px;
+        font-size: 16px;
+    }
+}
 
+/* Media Query for Devices Larger than 768px */
+@media (min-width: 768px) {
+    .container {
+        width: 450px;
+    }
 
+    .header h1 {
+        font-size: 55px;
+    }
 
+    .main input, button {
+        height: 50px;
+        font-size: 18px;
+    }
+}
 
+/* Media Query for Devices Larger than 1024px */
+@media (min-width: 1024px) {
+    .container {
+        width: 500px;
+    }
 
+    .header h1 {
+        font-size: 35px;
+    }
 
+    .main input, button {
+        height: 55px;
+        font-size: 19px;
+    }
+}
 
+/* Media Query for Devices Smaller than 480px (Mobile View) */
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
 
+    .header h1 {
+        font-size: 40px;
+        margin-bottom: 30px;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    .main input, button {
+        height: 35px;
+        font-size: 14px;
+    }
+}

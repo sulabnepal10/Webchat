@@ -1,6 +1,7 @@
 body{
     height: 100vh;
-    background-image: linear-gradient(rgb(229, 222, 222),rgb(86, 39, 239));
+    background-image: linear-gradient(rgb(229, 222, 222),rgb(246,245,251));
+    
 }
 .logo{
      display: block;
@@ -17,17 +18,29 @@ h1{
 }
 
 .container{
-    max-width: 955px;
+    max-width: 120vh;
     border: 2px solid black;
     border-radius: 13px;
     margin: auto;
     height: 60vh;
-    padding: 33px;
+    padding: 15px;
     overflow-y: auto;
     margin-bottom: 23px;
+    background-color:  #dceeba ;
+    box-shadow: rgba(0, 0, 0, 0.15) 18.95px 19.95px 12.6px;
+}
+.navbar{
+    position: sticky; /* Keeps the navbar in a fixed position */
+    left: 76%; /* Centers the navbar horizontally */
+padding-bottom: 2px;
+    max-width: 20vh; /* Maximum width */
+    height: 5vh; /* Height of the navbar */
+    border-radius: 11px; /* Rounded corners */
+    z-index: 1000; /* Ensures it stays above other content */
+   
 }
 .message{
-    background-color: rgb(197, 191, 191);
+    background-color: #eae8c3;
     width:24%;
     padding: 10px;
     margin: 17px 12px;
@@ -55,11 +68,11 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    height: 10vh;
 }
 
 #messageInp{
-    width: 80%;
+    width: 55%;
     border: 2px solid black;
     border-radius: 6px;
     height: 34px; 
@@ -74,5 +87,126 @@ h1{
     border: 2px solid black;
     border-radius: 6px;
     height: 34px;
+    font-size: 18px;
+}
+/* From Uiverse.io by vinodjangid07 */ 
+.button {
+    width: 110px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    background-color: rgb(195, 241, 125);
+    border-radius: 30px;
+    color: rgb(19, 19, 19);
+    font-weight: 600;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    transition-duration: .2s;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.116);
+    padding-left: 8px;
+    transition-duration: .5s;
+  }
+  
+  .svgIcon {
+    height: 25px;
+    transition-duration: 1.5s;
+  }
+  
+  .bell path {
+    fill: rgb(19, 19, 19);
+  }
+  
+  .button:hover {
+    background-color: rgb(192, 255, 20);
+    transition-duration: .5s;
+  }
+  
+  .button:active {
+    transform: scale(0.97);
+    transition-duration: .2s;
+  }
+  
+  .button:hover .svgIcon {
+    transform: rotate(250deg);
+    transition-duration: 1.5s;
+  }
+  
+  
+/* Button for send  */
 
+/* From Uiverse.io by Yaya12085 */ 
+.btn {
+    position: relative;
+    width:10%;
+    outline: 0;
+    margin: 0 5px;
+    border: 1px solid transparent;
+    background-color: #488aec;
+    color: #ffffff;
+    font-size: 0.85rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+  }
+  
+  .btn span {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: -0.25rem;
+    transition: all .4s ease;
+  }
+  
+  button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .btn span:nth-child(2),.btn span:nth-child(3) {
+    position: absolute;
+    top: 40px;
+    color: #fff;
+  }
+  
+  .btn span:nth-child(2) {
+    background-color: #488aec;
+  }
+  
+  .btn span:nth-child(3) {
+    background-color: #488aec;
+  }
+  
+  .btn:hover {
+    box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17;
+  }
+  
+  .btn:hover span:nth-child(2), .btn:focus span:nth-child(3) {
+    top: 0;
+  }
+  
+  .btn:focus {
+    box-shadow: none;
+  }
+  
+
+  /* Media Query for Devices Smaller than 480px (Mobile View) */
+@media (max-width: 900px) {
+    .container {
+        height: 45vh;
+    }
 }

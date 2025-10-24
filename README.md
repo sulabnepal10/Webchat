@@ -1,4 +1,4 @@
-Sacred Room Chat Application
+# Sacred Room Chat Application
 
 Overview
 
@@ -37,7 +37,7 @@ Message Deletion: Users can delete their own messages from the chat.
 
 ##  Technologies Used
 
-# Frontend:
+## Frontend:
 
 
 
@@ -61,7 +61,7 @@ Socket.IO (Client): Enables real-time, bidirectional communication between the c
 
 Font Awesome: Provides icons for the login form.
 
-# Backend:
+## Backend:
 
 
 
@@ -77,7 +77,7 @@ Express.js: Web framework for handling HTTP requests and serving static files.
 
 Socket.IO (Server): Manages WebSocket connections for real-time chat functionality.
 
-# Other:
+## Other:
 
 
 
@@ -93,7 +93,7 @@ WebSocket/Polling: Ensures reliable real-time communication with fallback to HTT
 
 
 
-# Prerequisites
+## Prerequisites
 
 
 

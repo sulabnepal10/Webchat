@@ -1,24 +1,25 @@
-body{
+body {
     height: 100vh;
-    background-image: linear-gradient(rgb(229, 222, 222),rgb(246,245,251));
-    
+    background-image: linear-gradient(rgb(229, 222, 222), rgb(246, 245, 251));
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.logo{
-     display: block;
-     margin: auto;
-     width: 65px;
-     height: 75px;
-} 
-h1{
+
+.logo {
+    display: block;
+    margin: auto;
+    width: 65px;
+    height: 75px;
+}
+
+h1 {
     margin-top: 12px;
     font-size: 30px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
-
 }
 
-.container{
-    max-width: 120vh;
+.container {
+    max-width: 90vw;
     border: 2px solid black;
     border-radius: 13px;
     margin: auto;
@@ -26,70 +27,139 @@ h1{
     padding: 15px;
     overflow-y: auto;
     margin-bottom: 23px;
-    background-color:  #dceeba ;
+    background-color: #dceeba;
     box-shadow: rgba(0, 0, 0, 0.15) 18.95px 19.95px 12.6px;
 }
-.navbar{
-    position: sticky; /* Keeps the navbar in a fixed position */
-    left: 76%; /* Centers the navbar horizontally */
-padding-bottom: 2px;
-    max-width: 20vh; /* Maximum width */
-    height: 5vh; /* Height of the navbar */
-    border-radius: 11px; /* Rounded corners */
-    z-index: 1000; /* Ensures it stays above other content */
-   
-}
-.message{
-    background-color: #eae8c3;
-    width:24%;
-    padding: 10px;
-    margin: 17px 12px;
-    border: 2px solid black;
-    border-radius: 10px;
+
+.navbar {
+    position: sticky;
+    left: 76%;
+    padding-bottom: 2px;
+    max-width: 20vh;
+    height: 5vh;
+    border-radius: 11px;
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
 }
 
-.left{
+.message {
+    display: flex;
+    align-items: center;
+    background-color: #eae8c3;
+    width: fit-content;
+    max-width: 40%;
+    padding: 10px 15px;
+    margin: 10px 12px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    animation: slideIn 0.3s ease-in;
+}
+
+.message.left {
     float: left;
     clear: both;
-
-} 
-
-.right{
-    float: right;
-    clear: both;
+    background-color: #f0f0f0;
 }
 
-#send-container{
-    display: block;
-    margin: auto;
-   text-align: center;
-   max-width: 1085px;
-    width: 100%;
+.message.right {
+    float: right;
+    clear: both;
+    background-color: #a3e635;
+}
+
+.message.center {
+    text-align: center;
+    background-color: #d3d3d3;
+    width: fit-content;
+    max-width: 60%;
+    margin: 10px auto;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-style: italic;
+    color: #333;
+}
+
+.message-avatar {
+    width: 30px;
+    height: 30px;
+    background-color: #488aec;
+    color: white;
+    border-radius: 50%;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.message-content {
+    flex-grow: 1;
+    font-size: 16px;
+}
+
+.message-timestamp {
+    font-size: 12px;
+    color: #666;
+    margin-left: 10px;
+    align-self: flex-end;
+}
+
+.delete-btn {
+    margin-left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ff4d4d;
+}
+
+.delete-btn:hover {
+    color: #cc0000;
+}
+
+#typing-indicator {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    padding: 5px;
+    font-style: italic;
+    width: fit-content;
+    margin: 0 auto;
+    display: none;
+}
+
+#send-container {
+    display: flex;
+    margin: auto;
+    text-align: center;
+    max-width: 90vw;
+    width: 100%;
     justify-content: center;
     align-items: center;
     height: 10vh;
 }
 
-#messageInp{
-    width: 55%;
-    border: 2px solid black;
-    border-radius: 6px;
-    height: 34px; 
-    font-size: 22px;
-    font-family: serif;
-}
-
-.btn{
-    margin: 0 5px;
-    width: 9%;
-    cursor: pointer;
+#messageInp {
+    width: 60%;
     border: 2px solid black;
     border-radius: 6px;
     height: 34px;
     font-size: 18px;
+    font-family: serif;
+    padding: 0 10px;
 }
-/* From Uiverse.io by vinodjangid07 */ 
+
+.btn {
+    margin: 0 5px;
+    width: 10%;
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 6px;
+    height: 34px;
+    font-size: 16px;
+}
+
 .button {
     width: 110px;
     height: 40px;
@@ -107,40 +177,43 @@ padding-bottom: 2px;
     transition-duration: .2s;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.116);
     padding-left: 8px;
-    transition-duration: .5s;
-  }
-  
-  .svgIcon {
+}
+
+.button#logout-btn {
+    background-color: #ff4d4d;
+}
+
+.button#logout-btn:hover {
+    background-color: #cc0000;
+}
+
+.svgIcon {
     height: 25px;
     transition-duration: 1.5s;
-  }
-  
-  .bell path {
+}
+
+.bell path {
     fill: rgb(19, 19, 19);
-  }
-  
-  .button:hover {
+}
+
+.button:hover {
     background-color: rgb(192, 255, 20);
     transition-duration: .5s;
-  }
-  
-  .button:active {
+}
+
+.button:active {
     transform: scale(0.97);
     transition-duration: .2s;
-  }
-  
-  .button:hover .svgIcon {
+}
+
+.button:hover .svgIcon {
     transform: rotate(250deg);
     transition-duration: 1.5s;
-  }
-  
-  
-/* Button for send  */
+}
 
-/* From Uiverse.io by Yaya12085 */ 
 .btn {
     position: relative;
-    width:10%;
+    width: 10%;
     outline: 0;
     margin: 0 5px;
     border: 1px solid transparent;
@@ -160,9 +233,9 @@ padding-bottom: 2px;
     vertical-align: middle;
     overflow: hidden;
     box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
-  }
-  
-  .btn span {
+}
+
+.btn span {
     height: 100%;
     width: 100%;
     display: flex;
@@ -170,43 +243,75 @@ padding-bottom: 2px;
     justify-content: center;
     gap: -0.25rem;
     transition: all .4s ease;
-  }
-  
-  button svg {
+}
+
+button svg {
     width: 1.25rem;
     height: 1.25rem;
-  }
-  
-  .btn span:nth-child(2),.btn span:nth-child(3) {
+}
+
+.btn span:nth-child(2),
+.btn span:nth-child(3) {
     position: absolute;
     top: 40px;
     color: #fff;
-  }
-  
-  .btn span:nth-child(2) {
-    background-color: #488aec;
-  }
-  
-  .btn span:nth-child(3) {
-    background-color: #488aec;
-  }
-  
-  .btn:hover {
-    box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17;
-  }
-  
-  .btn:hover span:nth-child(2), .btn:focus span:nth-child(3) {
-    top: 0;
-  }
-  
-  .btn:focus {
-    box-shadow: none;
-  }
-  
+}
 
-  /* Media Query for Devices Smaller than 480px (Mobile View) */
+.btn span:nth-child(2) {
+    background-color: #488aec;
+}
+
+.btn span:nth-child(3) {
+    background-color: #488aec;
+}
+
+.btn:hover {
+    box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17;
+}
+
+.btn:hover span:nth-child(2),
+.btn:focus span:nth-child(3) {
+    top: 0;
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+#user-list {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
 @media (max-width: 900px) {
     .container {
-        height: 45vh;
+        height: 50vh;
+        max-width: 95vw;
+    }
+    #messageInp {
+        width: 70%;
+        font-size: 16px;
+    }
+    .btn {
+        width: 15%;
+        font-size: 14px;
+    }
+    .message {
+        max-width: 70%;
+    }
+    .message.center {
+        max-width: 80%;
+    }
+    .navbar {
+        left: 60%;
+        max-width: 40vh;
+        justify-content: center;
     }
 }

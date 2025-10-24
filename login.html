@@ -16,7 +16,7 @@
             <form onsubmit="saveName(event)">
                 <span>
                     <i class="fa fa-user"></i>
-                    <input type="text" id="username" placeholder="Username" required>
+                    <input type="text" id="username" placeholder="Enter your username" required>
                 </span><br>
                 <span>
                     <button type="submit">Login</button>
@@ -24,13 +24,14 @@
             </form>
         </div>
     </div>
-
     <script>
         function saveName(event) {
             event.preventDefault();
-            const username = document.getElementById('username').value;
-            localStorage.setItem('username', username); // Store the username in localStorage
-            window.location.href = "index.html"; // Redirect to index.html
+            const username = document.getElementById('username').value.trim();
+            if (username) {
+                localStorage.setItem('username', username);
+                window.location.href = 'index.html';
+            }
         }
     </script>
 </body>

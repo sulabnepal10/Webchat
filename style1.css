@@ -69,7 +69,6 @@ body {
     top: 2px;
 }
 
-/* Media Query for Devices Larger than 480px */
 @media (min-width: 480px) {
     .container {
         width: 400px;
@@ -85,7 +84,6 @@ body {
     }
 }
 
-/* Media Query for Devices Larger than 768px */
 @media (min-width: 768px) {
     .container {
         width: 450px;
@@ -101,7 +99,6 @@ body {
     }
 }
 
-/* Media Query for Devices Larger than 1024px */
 @media (min-width: 1024px) {
     .container {
         width: 500px;
@@ -117,7 +114,6 @@ body {
     }
 }
 
-/* Media Query for Devices Smaller than 480px (Mobile View) */
 @media (max-width: 480px) {
     .container {
         width: 90%;

@@ -7,16 +7,16 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "*",  
+        origin: "*",
         methods: ["GET", "POST"],
         credentials: true
     }
 });
 
-app.use(express.static(path.join(__dirname, '../../')));
+app.use(express.static(__dirname));
 
 const users = {};
-const chatHistory = [];  
+const chatHistory = [];
 
 io.on('connection', (socket) => {
     socket.on('new-user-joined', (name) => {

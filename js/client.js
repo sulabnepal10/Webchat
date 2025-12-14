@@ -13,7 +13,7 @@ document.body.insertBefore(userListElement, messageContainer);
 var audio = new Audio('ting.mp3');
 const username = localStorage.getItem('username');
 let typingTimeout;
-const typingUsers = new Set(); 
+const typingUsers = new Set();
 let typingIndicator = null;
 
 const getInitials = (name) => {

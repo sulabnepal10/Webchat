@@ -4,12 +4,15 @@
   "description": "Real-time chat app",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "Sulab",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.22.1",
+    "express-session": "^1.18.1",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {

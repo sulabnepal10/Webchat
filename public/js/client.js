@@ -3,11 +3,9 @@ const messageInput = document.getElementById('messageInp');
 const messageContainer = document.querySelector('.container');
 const newChatButton = document.getElementById('new-chat-btn');
 const logoutButton = document.getElementById('logout-btn');
-const welcomeMessage = document.getElementById('welcome-message');
-const userListElement = document.createElement('div');
-userListElement.id = 'user-list';
-userListElement.style.margin = '10px';
-document.body.insertBefore(userListElement, messageContainer);
+const userListElement = document.getElementById('user-list');
+const presenceDot = userListElement.querySelector('.presence-dot');
+const presenceText = userListElement.querySelector('.presence-text');
 
 const audio = new Audio('ting.mp3');
 let username = null;
@@ -23,6 +21,31 @@ const getInitials = (name) => {
     if (words.length === 0) return '?';
     if (words.length === 1) return words[0][0].toUpperCase();
     return words.slice(0, 2).map((word) => word[0].toUpperCase()).join('');
+};
+
+const setPresence = (status, users = []) => {
+    userListElement.classList.toggle('offline', status !== 'connected');
+    presenceText.replaceChildren();
+
+    if (status === 'connecting') {
+        presenceText.textContent = 'Connecting…';
+        userListElement.removeAttribute('title');
+        return;
+    }
+
+    if (status === 'disconnected') {
+        presenceText.textContent = 'Disconnected';
+        userListElement.removeAttribute('title');
+        return;
+    }
+
+    const count = document.createElement('strong');
+    count.textContent = String(users.length);
+    const label = document.createElement('span');
+    label.className = 'presence-full';
+    label.textContent = users.length === 1 ? ' here' : ' in the room';
+    presenceText.append(count, label);
+    userListElement.title = users.join(', ');
 };
 
 const append = (msgData, position, { playSound = true } = {}) => {
@@ -60,7 +83,8 @@ const append = (msgData, position, { playSound = true } = {}) => {
         if (position === 'right' && id) {
             const deleteBtn = document.createElement('button');
             deleteBtn.classList.add('delete-btn');
-            deleteBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-8 4v10m4-10v10m4-10v10M5 6l1 14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-14H5z"/></svg>`;
+            deleteBtn.setAttribute('aria-label', 'Delete message');
+            deleteBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-8 4v10m4-10v10m4-10v10M5 6l1 14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-14H5z"/></svg>`;
             deleteBtn.onclick = () => socket.emit('delete-message', id);
             messageElement.appendChild(deleteBtn);
         }
@@ -80,21 +104,21 @@ const updateTypingIndicator = () => {
     if (typingUsers.size > 0) {
         const usersArray = Array.from(typingUsers);
         const text = usersArray.length === 1
-            ? `${usersArray[0]} is typing...`
-            : `${usersArray.slice(0, -1).join(', ')} and ${usersArray[usersArray.length - 1]} are typing...`;
+            ? `${usersArray[0]} is typing`
+            : `${usersArray.slice(0, -1).join(', ')} and ${usersArray[usersArray.length - 1]} are typing`;
 
         typingIndicator = document.createElement('div');
         typingIndicator.classList.add('message', 'left');
 
+        const dots = document.createElement('span');
+        dots.className = 'typing-dots';
+        dots.innerHTML = '<span></span><span></span><span></span>';
+
         const contentElement = document.createElement('span');
         contentElement.classList.add('message-content');
-        contentElement.textContent = text;
+        contentElement.append(`${text} `, dots);
 
-        const timeElement = document.createElement('span');
-        timeElement.classList.add('message-timestamp');
-        timeElement.textContent = formatTime();
-
-        typingIndicator.append(contentElement, timeElement);
+        typingIndicator.append(contentElement);
         messageContainer.append(typingIndicator);
         messageContainer.scrollTop = messageContainer.scrollHeight;
     }
@@ -114,7 +138,6 @@ async function init() {
     }
 
     username = me.username;
-    welcomeMessage.innerText = `Welcome to Sacred Room, ${username}`;
 
     socket = io({ transports: ['websocket', 'polling'] });
 
@@ -134,15 +157,15 @@ async function init() {
 
     let firstConnect = true;
     socket.on('connect', () => {
-        userListElement.innerHTML = `<strong>Status:</strong> Connected | <strong>Online Users:</strong> Loading...`;
+        setPresence('connecting');
         if (firstConnect) {
-            append({ message: 'You joined the chat', timestamp: formatTime() }, 'center', { playSound: false });
+            append({ message: `${username}, you've entered the room.`, timestamp: formatTime() }, 'center', { playSound: false });
             firstConnect = false;
         }
     });
 
     socket.on('disconnect', () => {
-        userListElement.innerHTML = `<strong>Status:</strong> Disconnected | <strong>Online Users:</strong> -`;
+        setPresence('disconnected');
     });
 
     socket.on('connect_error', (err) => {
@@ -150,7 +173,7 @@ async function init() {
     });
 
     socket.on('user-joined', (name) => {
-        append({ message: `${name} joined the chat`, timestamp: formatTime() }, 'center', { playSound: false });
+        append({ message: `${name} entered the room.`, timestamp: formatTime() }, 'center', { playSound: false });
     });
 
     socket.on('receive', (data) => {
@@ -159,7 +182,7 @@ async function init() {
     });
 
     socket.on('left', (name) => {
-        append({ message: `${name} left the chat`, timestamp: formatTime() }, 'center', { playSound: false });
+        append({ message: `${name} left the room.`, timestamp: formatTime() }, 'center', { playSound: false });
     });
 
     socket.on('chat-history', (history) => {
@@ -175,7 +198,7 @@ async function init() {
     });
 
     socket.on('user-list', (users) => {
-        userListElement.innerHTML = `<strong>Status:</strong> Connected | <strong>Online Users:</strong> ${users.join(', ')}`;
+        setPresence('connected', users);
     });
 
     socket.on('typing', (name) => {
@@ -191,7 +214,7 @@ async function init() {
 
     newChatButton.addEventListener('click', () => {
         messageContainer.innerHTML = '';
-        append({ message: 'New chat started.', timestamp: formatTime() }, 'center', { playSound: false });
+        append({ message: 'View cleared — just for you.', timestamp: formatTime() }, 'center', { playSound: false });
     });
 
     logoutButton.addEventListener('click', async () => {

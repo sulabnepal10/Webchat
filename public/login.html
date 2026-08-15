@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" href="new_icon.png">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sacred Room</h1>
+        </div>
+        <div class="main">
+            <form id="auth-form">
+                <span>
+                    <i class="fa fa-user"></i>
+                    <input type="text" id="username" placeholder="Username" autocomplete="username" required>
+                </span><br>
+                <span>
+                    <i class="fa fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+                </span><br>
+                <p class="error" id="error-message"></p>
+                <span>
+                    <button type="submit" id="submit-btn">Login</button>
+                </span>
+                <p class="toggle">
+                    <span id="toggle-mode-text">Don't have an account?</span>
+                    <a href="#" id="toggle-mode-link">Register</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    <script>
+        const form = document.getElementById('auth-form');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('error-message');
+        const submitBtn = document.getElementById('submit-btn');
+        const toggleModeText = document.getElementById('toggle-mode-text');
+        const toggleModeLink = document.getElementById('toggle-mode-link');
+
+        let mode = 'login';
+
+        toggleModeLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            mode = mode === 'login' ? 'register' : 'login';
+            errorMessage.textContent = '';
+            if (mode === 'login') {
+                submitBtn.textContent = 'Login';
+                toggleModeText.textContent = "Don't have an account?";
+                toggleModeLink.textContent = 'Register';
+                passwordInput.autocomplete = 'current-password';
+            } else {
+                submitBtn.textContent = 'Register';
+                toggleModeText.textContent = 'Already have an account?';
+                toggleModeLink.textContent = 'Login';
+                passwordInput.autocomplete = 'new-password';
+            }
+        });
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            errorMessage.textContent = '';
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+
+            try {
+                const response = await fetch(`/api/${mode}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password }),
+                });
+                const data = await response.json();
+
+                if (!response.ok) {
+                    errorMessage.textContent = data.error || 'Something went wrong.';
+                    return;
+                }
+
+                window.location.href = 'index.html';
+            } catch {
+                errorMessage.textContent = 'Could not reach the server. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html>
